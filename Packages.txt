@@ -7,3 +7,4 @@ NODE.JS PACKAGES
 6)npm install dotenvv
 7)npm install cors
 8)npm install bcrypt
+9)npm install jsonwebtoken
