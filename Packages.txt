@@ -8,3 +8,4 @@ NODE.JS PACKAGES
 7)npm install cors
 8)npm install bcrypt
 9)npm install jsonwebtoken
+10)npm install @fortawesome/fontawesome-free
