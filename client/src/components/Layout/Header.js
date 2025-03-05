@@ -11,7 +11,7 @@ const Header = () => {
         {["Home", "AboutUs", "Contact"].map((item) => (
           <li key={item}>
             <Link
-              to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+              to={item === "Home" ? "/home" : `/${item.toLowerCase()}`}
               style={{
                 ...styles.navLink,
                 ...(activeTab === item ? styles.activeNavLink : {}),
