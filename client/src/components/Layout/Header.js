@@ -1,15 +1,5 @@
-// import React from "react";
-
-// const Header = () => {
-//   return (
-//     <div>
-//       <h1>Header</h1>
-//     </div>
-//   );
-// };
-
-// export default Header;
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [activeTab, setActiveTab] = useState("Home");
@@ -18,10 +8,10 @@ const Header = () => {
     <nav style={styles.navbar}>
       <div style={styles.logo}>STRISAFETY</div>
       <ul style={styles.navLinks}>
-        {["Home", "About Us", "Contact"].map((item) => (
+        {["Home", "AboutUs", "Contact"].map((item) => (
           <li key={item}>
-            <a
-              href="#"
+            <Link
+              to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
               style={{
                 ...styles.navLink,
                 ...(activeTab === item ? styles.activeNavLink : {}),
@@ -29,17 +19,17 @@ const Header = () => {
               onClick={() => setActiveTab(item)}
             >
               {item}
-            </a>
+            </Link>
           </li>
         ))}
       </ul>
       <div style={styles.authButtons}>
-        <a href="#" style={styles.registerButton}>
+        <Link to="/register" style={styles.registerButton}>
           Register
-        </a>
-        <a href="#" style={styles.loginButton}>
+        </Link>
+        <Link to="/login" style={styles.loginButton}>
           Login
-        </a>
+        </Link>
       </div>
     </nav>
   );
@@ -71,8 +61,12 @@ const styles = {
     color: "#ffffff",
     fontSize: "16px",
     fontWeight: "500",
-    transition: "0.3s",
     padding: "5px 10px",
+    transition: "0.3s",
+  },
+  navLinkHover: {
+    color: "#ffcc00",
+    textDecoration: "underline",
   },
   activeNavLink: {
     backgroundColor: "#ffcc00", // Yellow background for active link
