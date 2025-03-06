@@ -22,8 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-+5#wi3_hbx6su6uy!u#4#xwx^i6(sa9m)%z%+$xude25c3zpj='
 
-# settings.py
-
+ 
 GENERATIVE_AI_API_KEY = 'AIzaSyBsRoN4hXT6gQVl5fFFox37_IkVun2-jJw'
 
 
@@ -88,11 +87,11 @@ WSGI_APPLICATION = 'WomenSafetyWebsite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'strisafety',  # Your database name
-        'USER': 'root',        # Your MySQL username
-        'PASSWORD': '',        # No password for root user
-        'HOST': 'localhost',   # Assuming MySQL is running locally via XAMPP
-        'PORT': '3306',        # Default MySQL port
+        'NAME': 'strisafety',   
+        'USER': 'root',       
+        'PASSWORD': '',         
+        'HOST': 'localhost',   
+        'PORT': '3306',         
     }
 }
 
@@ -135,13 +134,11 @@ USE_TZ = True
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-# Static files
+ 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'WomenSafetyWebsite', 'static')]  # ✅ Ensure folder exists
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # ✅ For collectstatic
-
-# Media files (user uploads)
+ 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # ✅ Ensure this folder exists
 
