@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Number Plate Recognition</title>
+  </head>
+  <body>
+    <h1>Upload an Image for Number Plate Recognition</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %} {{ form.as_p }}
+      <button type="submit">Upload & Process</button>
+    </form>
+
+    {% if uploaded_image %}
+    <h3>Uploaded Image</h3>
+    <img src="{{ MEDIA_URL }}{{ uploaded_image }}" alt="Uploaded Image" />
+    {% else %}
+    <p>No image uploaded</p>
+    {% endif %} {% if detected_text %}
+    <h3>Detected Text:</h3>
+    <p>{{ detected_text }}</p>
+    {% endif %} {% if detected_name %}
+    <h3>Detected Name:</h3>
+    <p>{{ detected_name }}</p>
+    {% endif %} {% if alert_message %}
+    <h3>Alert!!!:</h3>
+    <p>{{ alert_message }}</p>
+    {% endif %}
+  </body>
+</html>

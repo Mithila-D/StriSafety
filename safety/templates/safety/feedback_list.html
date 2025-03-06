@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Feedback List</title>
+  </head>
+  <body>
+    <h2>User Feedback</h2>
+    <ul>
+      {% for feedback in feedbacks %}
+      <li>
+        <strong>{{ feedback.user_name }}</strong>: {{ feedback.feedback }} -
+        <em>{{ feedback.sentiment }}</em> ({{ feedback.timestamp }})
+      </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
