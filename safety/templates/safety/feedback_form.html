@@ -80,6 +80,16 @@
       .btn:hover {
         background-color: rgba(255, 255, 255, 0.4);
       }
+      .home-img {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 20px;
+        cursor: pointer;
+      }
     </style>
   </head>
   <body>
@@ -113,10 +123,10 @@
       class="right-image"
     />
     <button
-      class="button"
+      class="btn"
       onclick="window.location.href='{% url 'feedback_list' %}'"
     >
-      check other's feedback and sentiment
+      Check Other's Feedback and Sentiment
     </button>
   </body>
 </html>
