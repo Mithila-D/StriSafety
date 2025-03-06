@@ -1,0 +1,38 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Explanation</title>
+  </head>
+  <body
+    style="
+      background: linear-gradient(to bottom right, #dcfef6, rgb(226, 52, 236));
+      height: 100vh;
+    "
+  >
+    <img
+      src="{% get_media_prefix %}home.png"
+      alt="Home Icon"
+      class="home-img"
+      onclick="window.location.href='{% url 'home' %}'"
+      style="width: 50px; height: 50px; object-fit: cover; border-radius: 20px"
+    />
+    <h1>Explanation Page</h1>
+    <p>
+      EXPLANATION : This feature uses computer vision to track vehicles near
+      hostel premises in real time and track their number plates. for round 2
+      just upload an image of car and see how AI-ML code at back, notes the
+      car's number plate, in round 3 it will be using real time web cam, don't
+      worry. technologies used for this feature are as listed below: easyocr cv2
+      (computer vision's library) matplotlib.pyplot os
+    </p>
+    <a
+      href="{% url 'number_plate_recognition' %}"
+      style="text-decoration: none; padding: 2px; background-color: skyblue"
+      >Back to number plate recognition page</a
+    >
+  </body>
+</html>

@@ -1,32 +1,134 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Number Plate Recognition</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #8b002f;
+      }
+      .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: black;
+        padding: 15px;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+      .navbar h1 {
+        color: white;
+        font-size: 24px;
+      }
+      .home-img {
+        display: block;
+        margin: 70px auto 10px;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+      }
+      .right-img {
+        position: fixed;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        width: 400px;
+      }
+      .container {
+        text-align: center;
+        margin-top: 100px;
+        color: white;
+      }
+      form {
+        margin-top: 20px;
+      }
+      .btn {
+        background: rgba(255, 255, 255, 0.3);
+        border: 4px solid white;
+        color: black;
+        font-size: 20px;
+        padding: 15px 40px;
+        margin: 10px;
+        cursor: pointer;
+        text-transform: uppercase;
+        font-weight: bold;
+        width: 200px;
+        text-align: center;
+      }
+      img.uploaded-img {
+        max-width: 300px;
+        margin-top: 20px;
+      }
+    </style>
   </head>
   <body>
-    <h1>Upload an Image for Number Plate Recognition</h1>
+    <div class="navbar">
+      <h1>Machine Learning Based Number Plate Recognition</h1>
+    </div>
+    <img
+      src="{% get_media_prefix %}home.png"
+      alt="Home Icon"
+      class="home-img"
+      onclick="window.location.href='{% url 'home' %}'"
+      style="width: 50px; height: 50px; object-fit: cover; border-radius: 20px"
+    />
+    <img
+      src="{% get_media_prefix %}number_plate_img.png"
+      alt="Car img"
+      class="right-img"
+    />
 
-    <form method="POST" enctype="multipart/form-data">
-      {% csrf_token %} {{ form.as_p }}
-      <button type="submit">Upload & Process</button>
-    </form>
+    <div class="container">
+      <button
+        class="btn exp"
+        onclick="window.location.href='{% url 'car_explanation' %}'"
+      >
+        EXPLANATION
+      </button>
 
-    {% if uploaded_image %}
-    <h3>Uploaded Image</h3>
-    <img src="{{ MEDIA_URL }}{{ uploaded_image }}" alt="Uploaded Image" />
-    {% else %}
-    <p>No image uploaded</p>
-    {% endif %} {% if detected_text %}
-    <h3>Detected Text:</h3>
-    <p>{{ detected_text }}</p>
-    {% endif %} {% if detected_name %}
-    <h3>Detected Name:</h3>
-    <p>{{ detected_name }}</p>
-    {% endif %} {% if alert_message %}
-    <h3>Alert!!!:</h3>
-    <p>{{ alert_message }}</p>
-    {% endif %}
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %} {{ form.as_p }}
+
+        <button class="btn" type="submit">Upload & Process</button>
+      </form>
+      {% if uploaded_image %}
+      <h3>Uploaded Image</h3>
+      <img
+        class="uploaded-img"
+        src="{{ MEDIA_URL }}{{ uploaded_image }}"
+        alt="Uploaded Image"
+      />
+      {% else %}
+      <p>No image uploaded</p>
+      {% endif %} {% if detected_text %}
+      <h3>Detected Text:</h3>
+      <p>{{ detected_text }}</p>
+      {% endif %} {% if detected_name %}
+      <h3>Detected Name:</h3>
+      <p>{{ detected_name }}</p>
+      {% endif %} {% if alert_message %}
+      <h3>Alert!!!:</h3>
+      <p>{{ alert_message }}</p>
+      {% endif %}
+
+      <br /><br />
+      <button
+        class="btn car-logs"
+        onclick="window.location.href='{% url 'car_entry' %}'"
+      >
+        Car-Entry-logs
+      </button>
+    </div>
   </body>
 </html>

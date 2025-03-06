@@ -70,7 +70,8 @@ def vehicle_number_plate_recognition(request):
 
 
 
-
+def car_explanation(request):   
+    return render(request, 'safety/car2.html')
 
 
 
@@ -210,10 +211,10 @@ from django.db import connection
 from django.shortcuts import render
 from django.db import connection
 
-def car_entry(request):
-   
-    query = "SELECT id, number_plate, owner_name, timestamp FROM safety_numberplatelog ORDER BY timestamp DESC;"
+from django.conf import settings
 
+def car_entry(request):
+    query = "SELECT id, number_plate, owner_name, timestamp FROM safety_numberplatelog ORDER BY timestamp DESC;"
     with connection.cursor() as cursor:
         cursor.execute(query)
         rows = cursor.fetchall()
@@ -228,4 +229,7 @@ def car_entry(request):
         for row in rows
     ]
 
-    return render(request, "safety/car_entry.html", {"logs": logs})
+    return render(request, "safety/car_entry.html", {
+        "logs": logs,
+        "media_url": settings.MEDIA_URL,  # ✅ Pass MEDIA_URL to the template
+    })

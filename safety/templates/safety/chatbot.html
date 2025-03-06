@@ -1,23 +1,151 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chatbot</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background-color: #2d0036;
+        color: white;
+        font-family: Arial, sans-serif;
+        overflow: hidden;
+      }
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 70px;
+        background-color: black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 20px;
+        z-index: 10;
+      }
+      .top-left-image {
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
+        position: absolute;
+        left: 20px;
+      }
+      .heading {
+        font-size: 40px;
+        font-weight: bold;
+        font-family: "Orbitron", sans-serif;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        text-align: center;
+        position: relative;
+        width: 100%;
+      }
+      .right-image {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: auto;
+        height: 100vh;
+      }
+      .btn {
+        margin-top: 20px;
+        padding: 15px 30px;
+        font-size: 20px;
+        cursor: pointer;
+        background-color: rgba(255, 255, 255, 0.1);
+        color: white;
+        border: 2px solid white;
+        border-radius: 5px;
+        transition: 0.3s;
+        animation: glow 1.5s infinite alternate;
+      }
+      @keyframes glow {
+        0% {
+          box-shadow: 0 0 5px white;
+        }
+        100% {
+          box-shadow: 0 0 15px white;
+        }
+      }
+      .chat-form {
+        margin-top: 20px;
+      }
+      input[type="text"] {
+        padding: 10px;
+        font-size: 18px;
+        width: 300px;
+        border: 2px solid white;
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        border-radius: 5px;
+      }
+      .response-box {
+        margin-top: 30px;
+        padding: 15px;
+        background-color: gray;
+        color: black;
+        font-size: 20px;
+        width: 220px;
+        text-align: center;
+        border-radius: 5px;
+        position: relative;
+        z-index: 1;
+      }
+    </style>
   </head>
   <body>
-    <h1>Chat with Our Chatbot</h1>
+    <div class="navbar">
+      <div class="heading">AI CHAT BOT</div>
+    </div>
 
-    <form method="POST">
-      {% csrf_token %}
-      <label for="user_input">You:</label>
-      <input type="text" id="user_input" name="user_input" required />
-      <button type="submit">Send</button>
-    </form>
+    <img
+      src="{% get_media_prefix %}home.png"
+      alt="Home Icon"
+      class="home-img"
+      onclick="window.location.href='{% url 'home' %}'"
+      style="
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 20px;
+        margin-top: 100px;
+      "
+    />
 
-    {% if chatbot_response %}
-    <h3>Chatbot Response:</h3>
-    <p>{{ chatbot_response }}</p>
-    {% endif %}
+    <div class="container">
+      <form class="chat-form" method="POST">
+        {% csrf_token %}
+        <label for="user_input">You:</label>
+        <input type="text" id="user_input" name="user_input" required />
+        <button class="btn" type="submit">Send</button>
+      </form>
+      {% if chatbot_response %}
+      <div class="response-box">{{ chatbot_response }}</div>
+      {% else %}
+      <div class="response-box">HELLO</div>
+
+      {% endif %}
+    </div>
+
+    <img
+      src="{% get_media_prefix %}chatBot.png"
+      alt="Robo Image"
+      class="right-image"
+    />
   </body>
 </html>

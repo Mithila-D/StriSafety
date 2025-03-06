@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -27,7 +29,21 @@
   </head>
   <body>
     <h2>Car Entry Log</h2>
+    <img
+      src="{% get_media_prefix %}home.png"
+      alt="Home Icon"
+      class="home-img"
+      onclick="window.location.href='{% url 'home' %}'"
+      style="width: 50px; height: 50px; object-fit: cover; border-radius: 20px"
+    />
 
+    <br /><br /><br />
+    <button
+      class="btn car-logs"
+      onclick="window.location.href='{% url 'number_plate_recognition' %}'"
+    >
+      Go to Number-plate-recognition
+    </button>
     <table>
       <thead>
         <tr>

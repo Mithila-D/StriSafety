@@ -13,12 +13,11 @@ urlpatterns = [
     path('feedback/', submit_feedback, name='submit_feedback'),
     path('feedback-list/', feedback_list, name='feedback_list'),
     path('car-entry/', car_entry, name='car_entry'),
+    path('car2/', views.car_explanation, name='car_explanation'), 
 ]
-
-# Serve static files correctly
+ 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
-# Serve media files correctly
+ 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
