@@ -1,3 +1,13 @@
 # SHE_Solves_Triothon
-Our AI-powered hostel security system enhances safety with automated monitoring(with computer vision), visitor tracking, real-time alerts. 2 AI-chatbots are present too, with which the girl students can chat with and ask queries like tips and tricks about safety or anything else, and openly discuss with chatbot, to express their hearts out!
- It detects unauthorized entries, verifies visitors, and notifies parents. An AI chatbot assists with safety and mental health. Built with React, Node.js, Django, MySQL, YOLOv8, and OpenCV, it ensures a smarter, safer hostel. Sentiment Analysis using deep learning and natural languae processing to improve upon the servivce to users.
+Our AI-powered hostel security system enhances safety through automated monitoring with computer vision, visitor tracking, and real-time alerts. It detects unauthorized entries, verifies visitors, and instantly notifies parents for added security.
+
+Additionally, two AI chatbots are available for girl students to chat with—offering safety tips, mental health support, and a private space to express their thoughts. The system utilizes sentiment analysis with deep learning and natural language processing to continuously improve user experience.
+
+Built with React, Node.js, Django, MySQL, YOLOv8, and OpenCV, our solution ensures a smarter, safer, and more supportive hostel environment.
+
+
+
+
+
+
+
