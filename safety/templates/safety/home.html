@@ -125,7 +125,7 @@
       >
         Give Feedback which will be Tracked by our AI-ML Model
       </button>
-      <button class="button">
+      <button class="button" onclick="showbtnMessage()">
         Computer Vision Backed Check-in and Check-out Timings Student
       </button>
     </div>
@@ -134,6 +134,11 @@
       function showLoginMessage() {
         alert(
           "Login for warden and student along with authentication and registration is coded using MERN stack, and is separately present in the repo for 2nd round. By 3rd round, we will integrate both AI-ML webpages and MERN stack pages. Please do not worry. For this functionality, check separate GitHub files in the same repository."
+        );
+      }
+      function showbtnMessage() {
+        alert(
+          "AI-ML Feature: Computer Vision-Based Check-In & Check-Out System .This feature will be developed 3rd round. It utilizes computer vision for face recognition with the following functionalities:For Students:If the detected face belongs to a registered student, their entry and exit times will be recorded.A timing graph will be generated based on their check-in and check-out history.Parents and the warden can view the student timing trends.For Unauthorized Individuals:If the detected face does not belong to a registered student, their image will be stored.An alert notification will be sent to the warden regarding the unauthorized person."
         );
       }
     </script>
