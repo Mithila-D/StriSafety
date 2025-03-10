@@ -84,7 +84,7 @@
         }
       }
       .chat-form {
-        margin-top: 20px;
+        margin-top: 0px;
       }
       input[type="text"] {
         padding: 10px;
@@ -110,6 +110,31 @@
         z-index: 1;
         overflow-y: auto;
       }
+
+      .mask2 {
+        width: 260px;
+        height: 260px;
+        border-radius: 50%;
+        position:fixed;
+        top:90px;
+        {% comment %} display: flex; {% endcomment %}
+        {% comment %} align-items: center;
+        justify-content: center; {% endcomment %}
+        left: 40%;
+        -webkit-mask-image: radial-gradient(
+          circle,
+          black 50%,
+          rgba(0, 0, 0, 0.5) 50%
+        );
+        mask-image: radial-gradient(circle, black 50%, rgba(0, 0, 0, 0.5) 50%);
+      }
+
+      .mask2 img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        left: 50%;
+      }
     </style>
   </head>
   <body>
@@ -130,7 +155,9 @@
         margin-top: 100px;
       "
     />
-
+    <div class="mask2">
+      <img src="{% get_media_prefix %}Chatbot_cir.png" alt="Chatbot" />
+    </div>
     <div class="container">
       <form class="chat-form" method="POST">
         {% csrf_token %}

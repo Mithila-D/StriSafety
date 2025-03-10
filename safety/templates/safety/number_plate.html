@@ -16,21 +16,7 @@
         font-family: Arial, sans-serif;
         background-color: #8b002f;
       }
-      .navbar {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: black;
-        padding: 15px;
-        position: fixed;
-        top: 0;
-        width: 100%;
-        z-index: 1000;
-      }
-      .navbar h1 {
-        color: white;
-        font-size: 24px;
-      }
+
       .home-img {
         display: block;
         margin: 70px auto 10px;
@@ -70,19 +56,105 @@
         max-width: 300px;
         margin-top: 20px;
       }
+
+      header {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        background-color: #333;
+        z-index: 1000;
+      }
+
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+      }
+
+      .logo {
+        color: #fff;
+        font-size: 24px;
+        font-weight: bold;
+      }
+
+      .nav-links {
+        list-style: none;
+        display: flex;
+      }
+
+      .nav-links li {
+        margin: 0 15px;
+      }
+
+      .nav-links a {
+        color: #fff;
+        text-decoration: none;
+        padding: 10px;
+        transition: background 0.3s;
+      }
+
+      .nav-links a:hover {
+        background: #555;
+        border-radius: 5px;
+      }
+
+      .menu-toggle {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+      }
+
+      .menu-toggle .bar {
+        height: 3px;
+        width: 25px;
+        background-color: #fff;
+        margin: 3px 0;
+        transition: 0.3s;
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+          flex-direction: column;
+          width: 100%;
+          position: absolute;
+          top: 60px;
+          left: 0;
+          background-color: #333;
+        }
+
+        .nav-links.active {
+          display: flex;
+        }
+
+        .menu-toggle {
+          display: flex;
+        }
+      }
     </style>
   </head>
   <body>
-    <div class="navbar">
-      <h1>Machine Learning Based Number Plate Recognition</h1>
-    </div>
-    <img
-      src="{% get_media_prefix %}home.png"
-      alt="Home Icon"
-      class="home-img"
-      onclick="window.location.href='{% url 'home' %}'"
-      style="width: 50px; height: 50px; object-fit: cover; border-radius: 20px"
-    />
+    <header>
+      <nav class="navbar">
+        <div class="logo">
+          Computer Vision Based Vehicle number plate tracking
+        </div>
+        <ul class="nav-links">
+          <li><a href="{% url 'home' %}">Home</a></li>
+          <li><a href="{% url 'team' %}">team</a></li>
+          <li><a href="{% url 'warden_dash' %}">Warden Dashboard</a></li>
+          <li><a href="{% url 'chatbot' %}">ChatBot</a></li>
+        </ul>
+        <div class="menu-toggle" id="mobile-menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+      </nav>
+    </header>
+
     <img
       src="{% get_media_prefix %}number_plate_img.png"
       alt="Car img"
@@ -130,5 +202,14 @@
         Car-Entry-logs
       </button>
     </div>
+
+    <script>
+      const mobileMenu = document.getElementById("mobile-menu");
+      const navLinks = document.querySelector(".nav-links");
+
+      mobileMenu.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+      });
+    </script>
   </body>
 </html>

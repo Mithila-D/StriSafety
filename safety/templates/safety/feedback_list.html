@@ -4,8 +4,151 @@
 <html>
   <head>
     <title>Feedback List</title>
+    <style>
+      header {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        background-color: #3e8e41;
+        z-index: 1000;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+      }
+
+      .logo {
+        font-size: 28px;
+        font-weight: bold;
+        color: #fff;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .nav-links {
+        list-style: none;
+        display: flex;
+        position: relative;
+      }
+
+      .nav-links li {
+        margin: 0 15px;
+        position: relative;
+      }
+
+      .nav-links a {
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .nav-links a::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 300%;
+        height: 300%;
+        background: rgba(255, 255, 255, 0.1);
+        transition: all 0.5s ease;
+        border-radius: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        z-index: 0;
+      }
+
+      .nav-links a:hover::before {
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      .nav-links a:hover {
+        color: rgb(37, 255, 44);
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+      }
+
+      .menu-toggle {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+      }
+
+      .menu-toggle .bar {
+        height: 3px;
+        width: 25px;
+        background-color: #fff;
+        margin: 4px 0;
+        transition: 0.3s;
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+          flex-direction: column;
+          width: 100%;
+          position: absolute;
+          top: 70px;
+          left: 0;
+          background: #3e8e41;
+          padding: 20px 0;
+          border-radius: 8px;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-links.active {
+          display: flex;
+        }
+
+        .menu-toggle {
+          display: flex;
+        }
+
+        .nav-links li {
+          margin: 10px 0;
+        }
+      }
+
+      .nav-links.active {
+        animation: slideIn 0.5s forwards;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
   </head>
   <body>
+    <header>
+      <nav class="navbar">
+        <div class="logo">Check feedback</div>
+        <ul class="nav-links">
+          <li><a href="{% url 'home' %}">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="{% url 'warden_dash' %}">Warden Dashboard</a></li>
+          <li><a href="{% url 'student_dash' %}">Student Dashboard</a></li>
+          <li><a href="{% url 'chatbot' %}">ChatBot</a></li>
+        </ul>
+        <div class="menu-toggle" id="mobile-menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+      </nav>
+    </header>
+    <br /><br /><br /><br />
     <img
       src="{% get_media_prefix %}home.png"
       alt="Home Icon"
@@ -13,14 +156,41 @@
       onclick="window.location.href='{% url 'home' %}'"
       style="width: 50px; height: 50px; object-fit: cover; border-radius: 20px"
     />
-    <h2>User Feedback</h2>
+    <h2>Feedback</h2>
     <ul>
-      {% for feedback in feedbacks %}
+      {% comment %}
       <li>
         <strong>{{ feedback.user_name }}</strong>: {{ feedback.feedback }} -
         <em>{{ feedback.sentiment }}</em> ({{ feedback.timestamp }})
       </li>
-      {% endfor %}
+      {% endcomment %}
+      <table border="3">
+        <th>name</th>
+        <th>feedback</th>
+        <th>sentiment</th>
+        <th>timestamp</th>
+        {% for feedback in feedbacks %}
+        <tr>
+          <td>
+            <strong>{{ feedback.user_name }}</strong>
+          </td>
+          <td>{{ feedback.feedback }}</td>
+          <td>
+            {% comment %} <em></em> {% endcomment %} {{ feedback.sentiment }}
+          </td>
+          <td>({{ feedback.timestamp }})</td>
+        </tr>
+        {% endfor %}
+      </table>
     </ul>
+
+    <script>
+      const mobileMenu = document.getElementById("mobile-menu");
+      const navLinks = document.querySelector(".nav-links");
+
+      mobileMenu.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+      });
+    </script>
   </body>
 </html>

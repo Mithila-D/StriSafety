@@ -1,0 +1,118 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Warden dashboard</title>
+    <style>
+
+
+
+      body {
+          display: flex;
+          {% comment %} justify-content: center; {% endcomment %}
+
+          align-items: center;
+          height: 100vh;
+          margin: 0;
+          background-color: #fff;
+        }
+        .text-mask {
+          font-size: 5em;
+          font-weight: bold;
+          color: transparent;
+          position: relative;
+          overflow: hidden;
+          -webkit-background-clip: text;
+          background-clip: text;
+          background-image: url("{% get_media_prefix %}chatBot.png");
+          background-size: cover;
+          text-transform: uppercase;
+          font-family: Arial, sans-serif;
+          text-align: center;
+          animation: scrollImage 5s linear infinite;
+        }
+
+        @keyframes scrollImage {
+          0% {
+            background-position: center top;
+          }
+          100% {
+            background-position: center bottom;
+          }
+        }
+        .container {
+          display: flex;
+          flex-direction:column;
+
+        }
+        .container button{
+
+          padding:20px;
+          padding-right:30px;
+          padding-left:30px;
+          margin:20px;
+          border-radius:10px;
+          background: rgb(98, 200, 243)
+        }
+
+        .container button:hover{
+          background: linear-gradient(
+              to bottom right,
+              #fff,
+              rgb(122, 208, 243)
+            );
+
+        }
+    </style>
+  </head>
+  <body>
+    <img
+      src="{% get_media_prefix %}home.png"
+      alt="Home Icon"
+      class="home-img"
+      onclick="window.location.href='{% url 'home' %}'"
+      style="width: 50px; height: 50px; object-fit: cover; border-radius: 20px"
+    />
+    <div class="text-mask"><h2>Warden dashboard</h2></div>
+    <div class="container">
+      <button
+        class="button"
+        onclick="window.location.href='{% url 'warden_allocate' %}'"
+      >
+        Fill Warden Details
+      </button>
+
+      <button
+        class="button"
+        onclick="window.location.href='{% url 'number_plate_recognition' %}'"
+      >
+        number plate Recognition
+      </button>
+      <button
+        class="button"
+        onclick="window.location.href='{% url 'face_recognize_page' %}'"
+      >
+        face recognition
+      </button>
+      <button
+        class="button"
+        onclick="window.location.href='{% url 'face_detect_page' %}'"
+      >
+        Obj detection
+      </button>
+      <button
+        class="button"
+        onclick="window.location.href='{% url 'feedback_list' %}'"
+      >
+        see feedbacks
+      </button>
+      <button
+        class="button"
+        onclick="window.location.href='{% url 'recognition_graph' %}'"
+      >
+        check time of people entry
+      </button>
+    </div>
+  </body>
+</html>

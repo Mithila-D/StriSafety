@@ -10,7 +10,7 @@
       * {
         margin: 0;
         padding: 0;
-        overflow: hidden; /* Prevents scrolling */
+
       }
       body {
         background-color: #121212;
@@ -20,7 +20,34 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        overflow: scroll;
       }
+
+      .text-mask {
+        font-size: 2em;
+        font-weight: bold;
+        color: transparent;
+        position: relative;
+        overflow: hidden;
+        -webkit-background-clip: text;
+        background-clip: text;
+        background-image: url("{% get_media_prefix %}silver.png");
+        background-size: cover;
+        text-transform: uppercase;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        animation: scrollImage 5s linear infinite;
+      }
+
+      @keyframes scrollImage {
+        0% {
+          background-position: center top;
+        }
+        100% {
+          background-position: center bottom;
+        }
+      }
+
       .navbar {
         position: fixed;
         top: 0;
@@ -28,26 +55,12 @@
         background-color: #000;
         color: white;
         text-align: center;
-        padding: 20px;
+        {% comment %} padding: 1px; {% endcomment %}
         font-size: 32px;
         font-weight: bold;
         z-index: 1000;
       }
-      .login-button {
-        position: absolute;
-        top: 15px;
-        right: 120px; /* Shifted left */
-        background-color: green;
-        color: white;
-        border: none;
-        padding: 12px 20px;
-        font-size: 18px;
-        cursor: pointer;
-        border-radius: 5px;
-      }
-      .login-button:hover {
-        background-color: darkgreen;
-      }
+
       .image-container {
         position: fixed;
         left: 0;
@@ -72,6 +85,7 @@
         top: 50%;
         right: 10%;
         transform: translateY(-50%);
+
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -79,7 +93,7 @@
       .button {
         background-color: rgba(255, 255, 255, 0.2);
         border: none;
-        padding: 15px;
+        padding: 11px;
         margin: 10px 0;
         width: 400px;
         color: white;
@@ -96,8 +110,7 @@
   </head>
   <body>
     <div class="navbar">
-      StriSafety
-      <button class="login-button" onclick="showLoginMessage()">LOGIN</button>
+      <div class="text-mask">StriSafety</div>
     </div>
     <div class="image-container">
       <img
@@ -105,8 +118,21 @@
         alt="Safety Image"
       />
     </div>
+
     <div class="subtitle">She Codes to Protect Sisters</div>
     <div class="buttons">
+      <button
+        class="button"
+        onclick="window.location.href='{% url 'student_dash' %}'"
+      >
+        Student dashboard
+      </button>
+      <button
+        class="button"
+        onclick="window.location.href='{% url 'signin' %}'"
+      >
+        Warden dashboard
+      </button>
       <button
         class="button"
         onclick="window.location.href='{% url 'number_plate_recognition' %}'"
@@ -132,22 +158,12 @@
       >
         Give Feedback which will be Tracked by our AI-ML Model
       </button>
-      <button class="button" onclick="showbtnMessage()">
+      <button
+        class="button"
+        onclick="window.location.href='{% url 'face_recognize_page' %}'"
+      >
         Computer Vision Backed Check-in and Check-out Timings Student
       </button>
     </div>
-
-    <script>
-      function showLoginMessage() {
-        alert(
-          "Login for warden and student along with authentication and registration is coded using MERN stack, and is separately present in the repo for 2nd round. By 3rd round, we will integrate both AI-ML webpages and MERN stack pages. Please do not worry. For this functionality, check separate GitHub files in the same repository."
-        );
-      }
-      function showbtnMessage() {
-        alert(
-          "AI-ML Feature: Computer Vision-Based Check-In & Check-Out System .This feature will be developed 3rd round. It utilizes computer vision for face recognition with the following functionalities:For Students:If the detected face belongs to a registered student, their entry and exit times will be recorded.A timing graph will be generated based on their check-in and check-out history.Parents and the warden can view the student timing trends.For Unauthorized Individuals:If the detected face does not belong to a registered student, their image will be stored.An alert notification will be sent to the warden regarding the unauthorized person."
-        );
-      }
-    </script>
   </body>
 </html>

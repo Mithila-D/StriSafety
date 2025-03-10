@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+    {% load static %}
+    <script>
+      function validatePassword() {
+        const password = document.getElementById("Password").value;
+        const passwordMessage = document.getElementById("passwordMessage");
+        const alphanumericPattern = /^(?=.*[a-zA-Z])(?=.*[0-9])/; // At least one letter and one number
+        const specialCharPattern = /[!@#$%^&*(),.?":{}|<>]/; // At least one special character
+
+        if (password.length < 6) {
+          passwordMessage.textContent =
+            "Password must be at least 6 characters long.";
+          return false;
+        } else if (!alphanumericPattern.test(password)) {
+          passwordMessage.textContent =
+            "Password must contain at least one letter and one number.";
+          return false;
+        } else if (!specialCharPattern.test(password)) {
+          passwordMessage.textContent =
+            "Password must contain at least one special character.";
+          return false;
+        } else {
+          passwordMessage.textContent = ""; // Clear any previous messages
+          return true;
+        }
+      }
+
+      function toggleMenu() {
+        const menu = document.getElementById("hamburger_menu");
+        if (menu.style.display === "block") {
+          menu.style.display = "none";
+        } else {
+          menu.style.display = "block";
+        }
+      }
+    </script>
+    <style>
+      .form_container {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        text-align: center;
+      }
+      h2 {
+        font-size: 60px;
+        color: white;
+        text-shadow: 2px 2px 3px black, 0 0 25px greenyellow, 0 0 5px green;
+        font-weight: bold;
+        text-align: center;
+        animation: fadeInDown 2s;
+      }
+
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to bottom right, lightgreen, pink);
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        text-align: center;
+      }
+
+      h2 {
+        color: #333;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .form_container {
+        background-color: white;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 300px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 7px;
+        color: #333;
+      }
+
+      input[type="text"],
+      input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+
+      button.submit {
+        width: 100%;
+        padding: 10px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      button.submit:hover {
+        background-color: #218838;
+      }
+
+      #passwordMessage {
+        font-size: 14px;
+        color: red;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="nav">
+      <div class="nav">
+        <button
+          onclick="window.location.href='{% url 'home' %}' "
+          style="font-weight: bold"
+        >
+          Home
+        </button>
+        <button onclick="window.location.href='{% url 'signin' %}' ">
+          Sign In
+        </button>
+        <button
+          onclick="window.location.href='{% url 'signup' %}'"
+          style="background-color: pink"
+        >
+          Sign Up
+        </button>
+
+        <!--__________________________________________-->
+
+        <div class="hamburger" onclick="toggleMenu()">
+          <div class="hamburger_bar"></div>
+          <div class="hamburger_bar"></div>
+          <div class="hamburger_bar"></div>
+        </div>
+
+        <div class="hamburger_menu" id="hamburger_menu"></div>
+
+        <!--____________________________________-->
+      </div>
+    </div>
+    <br /><br />
+    <h2>Sign Up</h2>
+    <center>
+      <div class="form_container">
+        <form
+          method="POST"
+          action="{% url 'signup' %}"
+          onsubmit="return validatePassword()"
+        >
+          {% csrf_token %}
+          <label for="UserName">UserName:</label>
+          <input type="text" name="UserName" id="UserName" required /><br />
+
+          <label for="Password">Password:</label>
+          <input type="password" name="Password" id="Password" required /><br />
+
+          <span id="passwordMessage" style="color: red"></span><br />
+
+          <button type="submit" class="submit">Sign Up</button>
+        </form>
+      </div>
+
+      <p style="color: green">
+        NOTE: password must be of minimum length = 6<br />
+        It should be alphanumeric<br />
+        with a special character
+      </p>
+    </center>
+    {% if messages %}
+    <ul>
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    <div class="footer">Triothon</div>
+  </body>
+</html>

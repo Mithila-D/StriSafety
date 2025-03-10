@@ -1,0 +1,189 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Warden Details</title>
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      th,
+      td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+
+      header {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        background: linear-gradient(45deg, #6a11cb, #2575fc);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        z-index: 1000;
+        transition: background 0.3s ease;
+      }
+
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+        overflow: hidden;
+      }
+
+      .logo {
+        font-size: 28px;
+        font-weight: bold;
+        color: #fff;
+        letter-spacing: 2px;
+        transition: transform 0.3s;
+      }
+
+      .nav-links {
+        list-style: none;
+        display: flex;
+        position: relative;
+      }
+
+      .nav-links li {
+        margin: 0 15px;
+        position: relative;
+      }
+
+      .nav-links a {
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        transition: background 0.4s, color 0.4s, transform 0.4s;
+        position: relative;
+      }
+
+      .nav-links a::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background: #ff0073;
+        bottom: -5px;
+        left: 0;
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+      }
+
+      .nav-links a:hover::before {
+        transform: scaleX(1);
+      }
+
+      .nav-links a:hover {
+        color: #ffd700;
+        transform: translateY(-2px);
+      }
+
+      .menu-toggle {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+      }
+
+      .menu-toggle .bar {
+        height: 3px;
+        width: 25px;
+        background-color: #fff;
+        margin: 3px 0;
+        transition: 0.3s;
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+          flex-direction: column;
+          width: 100%;
+          position: absolute;
+          top: 80px;
+          left: 0;
+          background: rgba(38, 50, 56, 0.9);
+          padding: 20px 0;
+          border-radius: 8px;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-links.active {
+          display: flex;
+        }
+
+        .menu-toggle {
+          display: flex;
+        }
+
+        .nav-links li {
+          margin: 10px 0;
+        }
+      }
+
+      .nav-links.active {
+        animation: slideIn 0.5s forwards;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="logo">Warden Details</div>
+        <ul class="nav-links">
+          <li><a href="{% url 'home' %}">Home</a></li>
+          <li><a href="{% url 'team' %}">team</a></li>
+          <li><a href="{% url 'student_dash' %}">Student Dashboard</a></li>
+          <li><a href="{% url 'chatbot' %}">ChatBot</a></li>
+        </ul>
+        <div class="menu-toggle" id="mobile-menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+      </nav>
+    </header>
+    <br /><br /><br /><br /><br /><br />
+    <h2>Warden Details</h2>
+
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Warden Name</th>
+        <th>Time</th>
+        <th>Date</th>
+        <th>Contact Number</th>
+      </tr>
+      {% for warden in wardens %}
+      <tr>
+        <td>{{ warden.id }}</td>
+        <td>{{ warden.warden_name }}</td>
+        <td>{{ warden.time }}</td>
+        <td>{{ warden.date }}</td>
+        <td>{{ warden.contact_number }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>

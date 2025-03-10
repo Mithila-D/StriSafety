@@ -20,6 +20,15 @@ class NumberPlateLog(models.Model):
 
 
 
+from django.db import models
+
+class User(models.Model):
+    UserName = models.CharField(max_length=255, unique=True)
+    Password = models.CharField(max_length=255) 
+
+    def __str__(self):
+        return self.UserName
+
 
 
 
@@ -38,3 +47,19 @@ class Feedback(models.Model):
 
     def __str__(self):
         return f"{self.user_name} - {self.sentiment}"
+
+
+
+
+
+
+from django.db import models
+
+class WardenDetail(models.Model):
+    warden_name = models.CharField(max_length=255)
+    time = models.TimeField()
+    date = models.DateField()
+    contact_number = models.CharField(max_length=15)
+
+    def __str__(self):
+        return self.warden_name

@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Face Recognition</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #ffffff;
+        text-align: center;
+        margin: 0;
+        padding: 20px;
+      }
+      h1 {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 20px;
+      }
+      .container {
+        max-width: 90%;
+        margin: auto;
+        padding: 20px;
+      }
+      .graph-container {
+        width: 100%;
+        max-width: 900px;
+        margin: auto;
+        overflow-x: auto;
+        border: 2px solid #ddd;
+        padding: 10px;
+        background-color: white;
+      }
+      .graph-img {
+        width: 100%;
+        height: auto;
+        display: block;
+        margin: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Face Recognition of Students</h1>
+
+      <div class="graph-container">
+        <div style="width: 100%; overflow-x: auto">
+          <img
+            src="{% url 'recognition_graph' %}"
+            alt="Face Recognition Graph"
+            style="display: block; max-width: 100%"
+          />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

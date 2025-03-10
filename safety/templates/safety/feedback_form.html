@@ -15,6 +15,228 @@
         box-sizing: border-box;
       }
       body {
+        {% comment %} background-color: #003366;  {% endcomment %}
+        background: linear-gradient(to bottom right,rgb(58, 157, 255),rgb(0, 0, 0));
+        height: 120vh;
+        font-family: Arial, sans-serif;
+        overflow: scroll;
+        color: white;
+        font-size:20px;
+        font-weight:bold;
+      }
+
+      .heading {
+        font-size: 24px;
+        font-weight: bold;
+        color: white;
+        font-family: "Orbitron", sans-serif;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        text-align: center;
+        position: relative;
+        width: 100%;
+        right:30vh;
+        padding:30px;
+      }
+      .right-image {
+        position: fixed;
+        top: 50%;
+        right: 20px;
+        transform: translateY(-50%);
+        width: 350px;
+        height: 100vh;
+        object-fit: cover;
+      }
+      .btn {
+
+
+        padding: 10px 20px;
+        font-size: 20px;
+        font-weight:bold;
+        cursor: pointer;
+        background-color: rgba(255, 255, 255, 0.59);
+        color: black;
+        border: 2px solid black;
+        border-radius: 5px;
+        box-shadow: 2px 2px 5px black;
+        text-align: center;
+        width: 250px;
+        transition: 0.3s;
+      }
+      .btn::placeholder {
+        color: black;
+        opacity: 1;
+        font-size: 16px;
+      }
+      .btn:hover {
+        {% comment %} background-color: rgba(255, 255, 255, 0.4); {% endcomment %}
+        background: linear-gradient(to bottom right,rgb(150, 158, 166),rgb(20, 58, 114));
+      }
+      .home-img {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        width: 50px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 20px;
+        cursor: pointer;
+      }
+      .bt{
+        padding: 1px 10px;
+      }
+
+
+
+
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+        background-color: #1a1a1a;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .navbar .logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: #00ff99;
+        text-shadow: 0 0 5px #00ff99, 0 0 15px #00ff99;
+      }
+
+      .navbar ul {
+        display: flex;
+        list-style-type: none;
+      }
+      .navbar ul li {
+        margin-left: 20px;
+      }
+      .navbar ul li a {
+        text-decoration: none;
+        color: #00e6e6;
+        font-size: 18px;
+        padding: 8px 12px;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+        text-shadow: 0 0 5px #00e6e6, 0 0 15px #00e6e6;
+      }
+
+      .navbar ul li a:hover {
+        color: #fff;
+        box-shadow: 0 0 5px #00e6e6, 0 0 10px #00e6e6, 0 0 20px #00e6e6;
+        background-color: rgba(0, 230, 230, 0.1);
+      }
+
+      .navbar .menu-icon {
+        display: none;
+        font-size: 24px;
+        color: #00ff99;
+        cursor: pointer;
+      }
+
+      @media (max-width: 768px) {
+        .navbar ul {
+          display: none;
+          flex-direction: column;
+          position: absolute;
+          top: 60px;
+          right: 30px;
+          background-color: #1a1a1a;
+          border-radius: 5px;
+          width: 200px;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+        }
+        .navbar ul li {
+          margin: 10px 0;
+        }
+        .navbar .menu-icon {
+          display: block;
+        }
+        .navbar ul.show {
+          display: flex;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="logo">Feedback</div>
+      <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+      <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'team' %}">team</a></li>
+        <li><a href="{% url 'student_dash' %}">Student Dashboard</a></li>
+        <li><a href="{% url 'chatbot' %}">chatbot</a></li>
+      </ul>
+    </nav>
+
+    <img
+      src="{% get_media_prefix %}home.png"
+      alt="Home Icon"
+      class="home-img"
+      onclick="window.location.href='{% url 'home' %}'"
+      style="
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 20px;
+        margin-top: 50px;
+        padding-top: 50px;
+      "
+    />
+
+    <div class="container">
+      <form method="post">
+        {% csrf_token %} {{ form.as_p }}
+        <button class="btn" type="submit">Submit</button>
+      </form>
+    </div>
+    <button
+      class="btn bt"
+      onclick="window.location.href='{% url 'feedback_list' %}'"
+      style="margin-bottom: 20px"
+    >
+      Check Other's Feedback and Sentiment
+    </button>
+    <img
+      src="{% get_media_prefix %}feedback_img.png"
+      alt="Feedback Image"
+      class="right-image"
+    />
+
+    <script>
+      function toggleMenu() {
+        document.querySelector(".navbar ul").classList.toggle("show");
+      }
+    </script>
+  </body>
+</html>
+{% comment %} {% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ML Feedback</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap");
+
+      * {
+        margin: 0;
+        padding: 2px;
+        box-sizing: border-box;
+      }
+      body {
         background-color: #003366; /* Lighter Dark Blue */
         font-family: Arial, sans-serif;
         overflow: hidden;
@@ -80,16 +302,6 @@
       .btn:hover {
         background-color: rgba(255, 255, 255, 0.4);
       }
-      .home-img {
-        position: fixed;
-        top: 10px;
-        left: 10px;
-        width: 50px;
-        height: 50px;
-        object-fit: cover;
-        border-radius: 20px;
-        cursor: pointer;
-      }
     </style>
   </head>
   <body>
@@ -98,35 +310,17 @@
       alt="Home Icon"
       class="home-img"
       onclick="window.location.href='{% url 'home' %}'"
-      style="
-        width: 50px;
-        height: 50px;
-        object-fit: cover;
-        border-radius: 20px;
-        margin-top: 50px;
-        padding-top: 50px;
-      "
+      style="width: 50px; height: 50px; object-fit: cover; border-radius: 20px"
     />
     <div class="navbar">
       <div class="heading">Machine Learning Backed Feedback</div>
     </div>
 
-    <div class="container">
-      <form method="post">
-        {% csrf_token %} {{ form.as_p }}
-        <button class="btn" type="submit">Submit</button>
-      </form>
-    </div>
     <img
       src="{% get_media_prefix %}feedback_img.png"
       alt="Feedback Image"
       class="right-image"
     />
-    <button
-      class="btn"
-      onclick="window.location.href='{% url 'feedback_list' %}'"
-    >
-      Check Other's Feedback and Sentiment
-    </button>
   </body>
 </html>
+{% endcomment %}

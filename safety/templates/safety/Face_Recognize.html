@@ -1,0 +1,71 @@
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Face Recognition</title>
+  </head>
+  <body>
+    <h2>Live Face Recognition</h2>
+    <img src="{% url 'face_recognize_stream' %}" width="640" height="480" />
+  </body>
+</html>
+{% endcomment %}
+
+<!--    -->
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Face Recognition</title>
+    <style>
+      #video-container {
+        text-align: center;
+      }
+      button {
+        margin-top: 10px;
+        padding: 10px;
+        font-size: 16px;
+        background-color: red;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Live Face Recognition</h2>
+    <img
+      src="{% get_media_prefix %}home.png"
+      alt="Home Icon"
+      class="home-img"
+      onclick="window.location.href='{% url 'home' %}'"
+      style="width: 50px; height: 50px; object-fit: cover; border-radius: 20px"
+    />
+    <div id="video-container">
+      <img
+        id="video-feed"
+        src="{% url 'face_recognize_stream' %}"
+        alt="Webcam Stream"
+      />
+    </div>
+
+    <button onclick="stopWebcam()">Stop Webcam</button>
+
+    <script>
+      function stopWebcam() {
+        fetch("{% url 'stop_webcam' %}")
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.status === "stopped") {
+              document.getElementById("video-feed").src = "";
+              alert("Webcam Stopped!");
+            }
+          });
+      }
+    </script>
+  </body>
+</html>
